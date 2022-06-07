@@ -45,7 +45,7 @@ fun HitsRowItemCompose(hitsItem: HitsItem ,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis
                 )
-                Switch(checked = true,
+                Switch(checked = false,
                     onCheckedChange = (onSwitchCheckChange),
                     modifier = Modifier.padding(all = 3.dp)
                 )

@@ -149,14 +149,14 @@ data class HitsItem(
 	val objectID: String? = null
 ){
 	fun getYYYYMMDD() : String?{
-		return createdAt?.split('T')?.get(0)
+		return createdAt?.split('T')?.get(0)			//get date from createAt
 	}
 
 	fun getDate():String?{
-		return getYYYYMMDD()?.split('-')?.get(2)
+		return getYYYYMMDD()?.split('-')?.get(2)		//get date from date
 	}
 
-	fun getMonth() : String?{
+	fun getMonth() : String?{									//get month from date
 		when(getYYYYMMDD()?.split('-')?.get(1)){
 			"01" ->{return "January"}
 			"02" ->{return "February"}
@@ -174,11 +174,11 @@ data class HitsItem(
 		return null
 	}
 
-	fun getYear() : String?{
+	fun getYear() : String?{									//get year from date
 		return getYYYYMMDD()?.split('-')?.get(0)
 	}
 
-	fun getDDMMYYYY() : String?{
+	fun getDDMMYYYY() : String?{								// format in mm dd yyyy
 		return if (getDate()!=null && getMonth()!=null && getYear()!=null){
 			getMonth() + " "+getDate()+", "+getYear()
 		}else{

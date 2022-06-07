@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class HitsItemPagingSource @Inject constructor(private val hitsService: HitsService) : PagingSource<Int,HitsItem>() {
     override fun getRefreshKey(state: PagingState<Int, HitsItem>): Int? {
-        return state.anchorPosition
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, HitsItem> {

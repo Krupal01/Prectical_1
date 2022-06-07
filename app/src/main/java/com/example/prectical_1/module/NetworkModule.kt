@@ -16,7 +16,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getHitsService() : HitsService{
+    fun getHitsService() : HitsService{                                 //crete singleton HiltsService object
         return Retrofit
             .Builder()
             .baseUrl(Utils.BASE_URL)
