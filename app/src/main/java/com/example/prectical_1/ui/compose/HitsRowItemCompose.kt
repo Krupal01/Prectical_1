@@ -10,6 +10,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +25,7 @@ import com.example.prectical_1.model.HitsItem
 @Composable
 fun HitsRowItemCompose(hitsItem: HitsItem ,
                        onCardClick : () -> Unit ,
+                       isSelected : Boolean,
                        onSwitchCheckChange : (Boolean) -> Unit
 ){
     Card(
@@ -45,7 +48,7 @@ fun HitsRowItemCompose(hitsItem: HitsItem ,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis
                 )
-                Switch(checked = false,
+                Switch(checked = isSelected,
                     onCheckedChange = (onSwitchCheckChange),
                     modifier = Modifier.padding(all = 3.dp)
                 )
