@@ -1,9 +1,5 @@
 package com.example.prectical_1.viewmodel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,9 +7,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.prectical_1.model.HitsItem
-import com.example.prectical_1.paging_source.HitsItemPagingSource
 import com.example.prectical_1.repository.HitsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -24,5 +18,29 @@ class HitsViewModel @Inject constructor(private val hitsRepo: HitsRepo) : ViewMo
     var hitsList : Flow<PagingData<HitsItem>> = Pager(PagingConfig(pageSize = 20)){
         hitsRepo.getPagingSource()
     }.flow.cachedIn(viewModelScope)             //data flow for paging
+
+    var selected = MutableLiveData<MutableList<HitsItem>>()
+    var _selected = mutableListOf<HitsItem>()
+
+    fun setSelected(hitsItem: HitsItem){
+        _selected.add(hitsItem)
+        selected.value = _selected
+    }
+
+    fun setDeselected(hitsItem: HitsItem){
+        _selected = selected.value!!
+        _selected.remove(hitsItem)
+        selected.value = _selected
+    }
+
+    fun clearSelection(){
+        _selected.clear()
+        selected.value = _selected
+    }
+
+    fun isSelected(hitsItem: HitsItem): Boolean {
+        return selected.value?.contains(hitsItem) ?: false
+    }
+
 
 }
